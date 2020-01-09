@@ -54,8 +54,8 @@ function addHtml() {
                 } 
               </style>
               
-              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=3"></script>
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=3"></script>
+              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=4"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=4"></script>
               `;
 
   $('body').append(style);
