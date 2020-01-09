@@ -10,6 +10,6 @@ let time = setInterval(_ => {
   } catch (err) {
     console.log(err);
   }
-})
+},30)
 
 
