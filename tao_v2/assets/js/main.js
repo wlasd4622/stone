@@ -71,7 +71,7 @@ async function appendIframe() {
         let params = urlAnalyze(href)
         let id = params.id
         let _iframe = $('<iframe>')
-        _iframe.attr('src', src)
+        _iframe.attr('src', href)
         _iframe.addClass('_iframe')
         _iframe.hide()
         $('body').append(_iframe)
