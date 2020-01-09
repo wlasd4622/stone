@@ -1,0 +1,38 @@
+{
+  "name": "tao_v2",
+  "version": "0.0.2",
+  "description": "检测淘宝商品视频工具",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.taobao.com/*",
+    "*://*.tmall.com/*"
+  ],
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_icon": "logo.png"
+  },
+  "background": {
+    "scripts": [
+      "./assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*"
+      ],
+      "js": [
+        "./assets/js/jquery.js",
+        "./assets/js/main.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}
