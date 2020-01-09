@@ -54,14 +54,8 @@ function addHtml() {
                 } 
               </style>
               
-              <script>
-                alert(6666)
-                console.log(666)
-                window.aasdfa=()=>{
-  console.log(123)
-
-                }
-              </script>
+              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=3"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=3"></script>
               `;
 
   $('body').append(style);
@@ -163,8 +157,7 @@ chrome.extension.sendRequest({
   speed = res.speed
 });
 
-window.detectionVideo = async () => {
-  console.log(6666);
+async function detectionVideo() {
   let htmlHeight = $('html').height()
   for (let i = 0; i < 5; i++) {
     let top = (htmlHeight / 5) * (i + 1)
@@ -176,9 +169,16 @@ window.detectionVideo = async () => {
   console.log(`>>>`, 'taobao.com/search');
   window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   // 发送消息
-  
+
   appendIframe()
   updateData();
+}
+
+function addScript(src) {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = src;
+  document.getElementsByTagName('head')[0].appendChild(script);
 }
 
 (async () => {
@@ -186,6 +186,15 @@ window.detectionVideo = async () => {
   if (location.href.includes('taobao.com/search')) {
     addHtml();
     $('.collection-title').append(`<button class="detectionVideo" onclick="detectionVideo">检测视频</button>`)
+    console.log('>>>>>>>', localStorage.getItem('aa'));
+    let time = setInterval(async _ => {
+      let wwlTask = localStorage.getItem('wwlTask')
+      if (wwlTask) {
+        localStorage.setItem('wwlTask', '');
+        clearInterval(time)
+        await detectionVideo()
+      }
+    }, 300)
   } else if (location.href.includes("/item.htm")) {
     $(function () {
       setTimeout(_ => {

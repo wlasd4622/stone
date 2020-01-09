@@ -1,5 +1,4 @@
-console.log(1111)
-
-window.detectionVideo = () => {
-  console.log(6666);
-}
+$(document).on('click','.detectionVideo',function(){
+  console.log('5656');
+  localStorage.setItem('wwlTask', true);
+})
