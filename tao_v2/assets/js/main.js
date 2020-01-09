@@ -54,8 +54,8 @@ function addHtml() {
                 } 
               </style>
               
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=6"></script>
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=6"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=7"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=7"></script>
               `;
 
   $('body').append(style);
