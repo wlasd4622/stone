@@ -6,6 +6,6 @@ setTimeout(_ => {
       localStorage.setItem('wwlTask', true);
     })
   })
-})
+},1000)
 
 

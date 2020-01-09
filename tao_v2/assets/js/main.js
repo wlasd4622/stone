@@ -54,8 +54,8 @@ function addHtml() {
                 } 
               </style>
               
-              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=5"></script>
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=5"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=6"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=6"></script>
               `;
 
   $('body').append(style);
@@ -70,11 +70,11 @@ async function appendIframe() {
       if (href) {
         let params = urlAnalyze(href)
         let id = params.id
-        // let _iframe = $('<iframe>')
-        // _iframe.attr('src', src)
-        // _iframe.addClass('_iframe')
-        // _iframe.hide()
-        // $('body').append(_iframe)
+        let _iframe = $('<iframe>')
+        _iframe.attr('src', src)
+        _iframe.addClass('_iframe')
+        _iframe.hide()
+        $('body').append(_iframe)
         await sleep(speed)
         console.log(`>>>>>>>>>>>>>>>>(${i + 1}/${arr.length})`);
       }
