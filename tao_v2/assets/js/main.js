@@ -54,8 +54,8 @@ function addHtml() {
                 } 
               </style>
               
-              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=4"></script>
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=4"></script>
+              <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js?v=5"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=5"></script>
               `;
 
   $('body').append(style);
@@ -90,39 +90,37 @@ function updateData() {
     }, res => {
       try {
         let keys = Object.keys(res.goodsMap || {})
-        if (keys && keys.length) {
-          $('.wwl-content').remove();
-          // 添加class
-          window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
-          if (arr.length) {
-            for (let i = 0; i < arr.length; i++) {
-              let item = $(arr[i]);
-              item.addClass('wwl')
-              item.append(`
+        $('.wwl-content').remove();
+        // 添加class
+        window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
+        if (arr.length) {
+          for (let i = 0; i < arr.length; i++) {
+            let item = $(arr[i]);
+            item.addClass('wwl')
+            item.append(`
               <div class="wwl-content">
                 <div class="stauts">视频检查中...</div>
               </div>`)
-            }
           }
-          keys.map(key => {
-            let content = $('a[trace-nid=' + key + ']:eq(0)').parents('.item').find('.wwl-content');
-            if (!content.data('status')) {
-              content.data('status', 1)
-              let data = res.goodsMap[key]
-              let html = ''
-              if (data.videoSrc) {
-                html = `
+        }
+        keys.map(key => {
+          let content = $('a[trace-nid=' + key + ']:eq(0)').parents('.item').find('.wwl-content');
+          if (!content.data('status')) {
+            content.data('status', 1)
+            let data = res.goodsMap[key]
+            let html = ''
+            if (data.videoSrc) {
+              html = `
                     <button class="play" data-src="${data.videoSrc}">
                       <a href="${data.videoSrc}" target="_blank">play</a>
                     </button>
                   `
-              } else {
-                html = `<div>未检测到视频</div>`
-              }
-              content.html(html)
+            } else {
+              html = `<div>未检测到视频</div>`
             }
-          })
-        }
+            content.html(html)
+          }
+        })
       } catch (err) {
         console.log(err);
       }
