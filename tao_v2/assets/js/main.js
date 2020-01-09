@@ -185,8 +185,6 @@ function addScript(src) {
   await sleep(1000)
   if (location.href.includes('taobao.com/search')) {
     addHtml();
-    $('.collection-title').append(`<button class="detectionVideo" onclick="detectionVideo">检测视频</button>`)
-    console.log('>>>>>>>', localStorage.getItem('aa'));
     let time = setInterval(async _ => {
       let wwlTask = localStorage.getItem('wwlTask')
       if (wwlTask) {
