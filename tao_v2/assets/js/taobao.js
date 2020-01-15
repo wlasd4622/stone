@@ -10,7 +10,7 @@ let time = setInterval(_ => {
         localStorage.setItem('wwlTask', true);
       }).on('click', '.wwlplay', function () {
         let audioContainer = $('.audioContainer')
-        if (!audioContainer) {
+        if (!audioContainer.length) {
           audioContainer = $('<div>')
           audioContainer.addClass('audioContainer')
           audioContainer.append(`
