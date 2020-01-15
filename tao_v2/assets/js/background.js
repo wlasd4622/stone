@@ -14,6 +14,9 @@ chrome.extension.onRequest.addListener(
       sendResponse({ goodsMap });
     } else if (request.type === "getSpeed") {
       sendResponse({ speed });
+    } else if (request.type === 'clearData') {
+      goodsMap = {}
+      sendResponse({})
     } else {
       sendResponse({});
     }

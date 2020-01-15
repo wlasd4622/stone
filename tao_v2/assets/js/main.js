@@ -19,6 +19,7 @@ function addHtml() {
                   cursor: pointer;
                   z-index: 99999;
                   top: 4px;
+                  position: fixed;
                   left: 10px;
                 }
                 div#mainsrp-sortbar {
@@ -259,6 +260,9 @@ function addScript(src) {
       if (wwlTask) {
         localStorage.setItem('wwlTask', '');
         clearInterval(time)
+        chrome.extension.sendRequest({
+          type: 'clearData'
+        });
         await detectionVideo()
       }
     }, 300)
