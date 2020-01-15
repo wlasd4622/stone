@@ -106,14 +106,19 @@ function addHtml() {
               
               .audioContainer .wrap .c_close button {
                   padding: 3px 10px;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
               }
+              .audioContainer .wrap  svg.icon {
+                width: 20px;
+                height: 20px;
+                color: #fff;
+            }
               </style>
               
               <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=${rand}"></script>
               <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=${rand}"></script>
-              <link href="//www.jq22.com/demo/vide7.1.0201807161136/css/video-js.min.css?v=${rand}" rel="stylesheet">
-              <script src="//www.jq22.com/demo/vide7.1.0201807161136/js/video.min.js?v=${rand}"></script>
-              <script src="//vjs.zencdn.net/5.19/lang/zh-CN.js?v=${rand}"></script>
               `;
 
   $('body').append(style);
