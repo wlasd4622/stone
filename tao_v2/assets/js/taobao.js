@@ -26,7 +26,7 @@ let time = setInterval(_ => {
       }).on('click', '.c_close', function () {
         $('.audioContainer').remove();
       }).on('click', '.wwldownload', function () {
-        var src = $(this).data.src;
+        var src = $(this).data().src;
         wwlDowmload(src)
       })
     }
