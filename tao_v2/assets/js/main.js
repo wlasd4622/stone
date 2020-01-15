@@ -57,6 +57,11 @@ function addHtml() {
                 .wwl-content button a{
                   color: #00ff44;
                 }
+                .c_liframe{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
                 .wwl-content button:hover {
                     background: #81a58b87;
                 } 
@@ -78,9 +83,7 @@ function addHtml() {
               }
               
               .audioContainer .wrap {
-                  width: 50%;
                   position: relative;
-                  max-height: 80vh;
               }
               
               .audioContainer .wrap iframe {
@@ -97,8 +100,8 @@ function addHtml() {
               
               .audioContainer .wrap  .c_close {
                   position: absolute;
-                  right: -4px;
-                  top: -12px;
+                  right: -42px;
+                  top: -25px;
                   padding: 3px 2px;
               }
               
@@ -107,6 +110,16 @@ function addHtml() {
                   background: none;
                   border: none;
                   cursor: pointer;
+                  background: rgba(255, 255, 255, 0.55);
+                  border-radius: 100%;
+                  height: 40px;
+                  width: 40px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+              }
+              .audioContainer .wrap .c_close button:hover{
+                background: rgba(255, 255, 255, 0.8);
               }
               .audioContainer .wrap  svg.icon {
                 width: 20px;
@@ -125,7 +138,7 @@ function addHtml() {
 async function appendIframe() {
   window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   if (arr.length) {
-    let len = 5// || arr.length;
+    let len = arr.length;
     for (let i = 0; i < len; i++) {
       let item = $(arr[i]);
       let href = item.find('a:eq(0)').attr('href')
@@ -145,7 +158,13 @@ async function appendIframe() {
 }
 
 function updateData() {
-  setInterval(() => {
+  let cUrl = location.href;
+  let jcTime = setInterval(() => {
+    if (cUrl !== location.href) {
+      clearInterval(jcTime);
+      cUrl = location.href;
+      return false;
+    }
     // 发送消息
     chrome.extension.sendRequest({
       type: 'getData',
@@ -221,6 +240,7 @@ function urlAnalyze(url = "") {
 // ================================================================================================
 
 let speed = 1000;
+
 chrome.extension.sendRequest({
   type: 'getSpeed',
 }, res => {
@@ -251,15 +271,27 @@ function addScript(src) {
   document.getElementsByTagName('head')[0].appendChild(script);
 }
 
+window.currUrl = location.href;
+
 (async () => {
   await sleep(1000)
   if (location.href.includes('taobao.com/search')) {
+    setInterval(function () {
+      if (window.currUrl !== location.href) {
+        console.log('url change');
+        window.currUrl = location.href;
+        localStorage.setItem('wwlTask', '');
+        chrome.extension.sendRequest({
+          type: 'clearData'
+        });
+      }
+    }, 10)
+    localStorage.setItem('wwlTask', '');
     addHtml();
-    let time = setInterval(async _ => {
+    setInterval(async _ => {
       let wwlTask = localStorage.getItem('wwlTask')
       if (wwlTask) {
         localStorage.setItem('wwlTask', '');
-        clearInterval(time)
         chrome.extension.sendRequest({
           type: 'clearData'
         });
