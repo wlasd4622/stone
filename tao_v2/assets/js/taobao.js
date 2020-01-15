@@ -1,7 +1,7 @@
-let time = setInterval(_ => {
+var wwlTtime = setInterval(_ => {
   try {
     if ($ && $.fn) {
-      clearInterval(time)
+      clearInterval(wwlTtime)
       $('#mainsrp-sortbar').append(`<button class="detectionVideo detectionVideo1">检测视频</button>`)
       $('.collection-title').append(`<button class="detectionVideo ">检测视频</button>`)
       $(document).on('click', '.detectionVideo', function () {
