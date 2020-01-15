@@ -2,7 +2,7 @@ var wwlTtime = setInterval(_ => {
   try {
     if ($ && $.fn) {
       clearInterval(wwlTtime)
-      $('.body').append(`<button class="detectionVideo ">检测视频</button>`)
+      $('body').append(`<button class="detectionVideo ">检测视频</button>`)
       $(document).on('click', '.detectionVideo', function () {
         localStorage.setItem('wwlTask', true);
       }).on('click', '.wwlplay', function () {

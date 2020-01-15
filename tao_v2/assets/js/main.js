@@ -17,11 +17,9 @@ function addHtml() {
                   float: right;
                   padding: 0 10px;
                   cursor: pointer;
-                }
-                button.detectionVideo.detectionVideo1 {
-                  position: absolute;
-                  bottom: 5px;
-                  right: 5px;
+                  z-index: 99999;
+                  top: 4px;
+                  left: 10px;
                 }
                 div#mainsrp-sortbar {
                   position: relative;
@@ -81,6 +79,7 @@ function addHtml() {
               .audioContainer .wrap {
                   width: 50%;
                   position: relative;
+                  max-height: 80vh;
               }
               
               .audioContainer .wrap iframe {
@@ -125,7 +124,8 @@ function addHtml() {
 async function appendIframe() {
   window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   if (arr.length) {
-    for (let i = 0; i < arr.length; i++) {
+    let len = 5// || arr.length;
+    for (let i = 0; i < len; i++) {
       let item = $(arr[i]);
       let href = item.find('a:eq(0)').attr('href')
       if (href) {
@@ -264,22 +264,27 @@ function addScript(src) {
     }, 300)
   } else if (location.href.includes("/item.htm")) {
     $(function () {
-      setTimeout(_ => {
+      let tCount = 0;
+      let sTime = setInterval(_ => {
+        tCount++;
         let videoSrc = '';
         let imgSrc = ''
         if ($('.lib-video:eq(0)').length && $('.lib-video source').length) {
           videoSrc = $('.lib-video:eq(0) source').attr('src');
           imgSrc = $('#J_UlThumb li:eq(0) img').attr('src');
         }
-        // 发送消息
-        chrome.extension.sendRequest({
-          type: 'setVideo',
-          videoSrc,
-          title: $('.tb-detail-hd h1').text().trim() || $('.tb-main-title').text().trim() || '',
-          href: location.href,
-          imgSrc,
-          ...urlAnalyze(location.href)
-        });
+        if (videoSrc || tCount > 5) {
+          clearInterval(sTime)
+          // 发送消息
+          chrome.extension.sendRequest({
+            type: 'setVideo',
+            videoSrc,
+            title: $('.tb-detail-hd h1').text().trim() || $('.tb-main-title').text().trim() || '',
+            href: location.href,
+            imgSrc,
+            ...urlAnalyze(location.href)
+          });
+        }
       }, 1000)
     })
   }
