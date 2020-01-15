@@ -2,6 +2,7 @@
   "name": "tao_v2",
   "version": "0.0.2",
   "description": "检测淘宝商品视频工具",
+  "author":"wwl",
   "permissions": [
     "webRequest",
     "webRequestBlocking",

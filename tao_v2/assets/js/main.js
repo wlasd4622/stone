@@ -62,7 +62,7 @@ function addHtml() {
 }
 
 async function appendIframe() {
-  window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
+  window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       let item = $(arr[i]);
@@ -92,7 +92,7 @@ function updateData() {
         let keys = Object.keys(res.goodsMap || {})
         $('.wwl-content').remove();
         // 添加class
-        window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
+        window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
         if (arr.length) {
           for (let i = 0; i < arr.length; i++) {
             let item = $(arr[i]);
@@ -104,21 +104,31 @@ function updateData() {
           }
         }
         keys.map(key => {
-          let content = $('a[trace-nid=' + key + ']:eq(0)').parents('.item').find('.wwl-content');
-          if (!content.data('status')) {
-            content.data('status', 1)
-            let data = res.goodsMap[key]
-            let html = ''
-            if (data.videoSrc) {
-              html = `
+          try {
+            let item = $('a[trace-nid=' + key + ']:eq(0)').parents('.item')
+            let content = item.find('.wwl-content');
+            if (!content.data('status')) {
+              content.data('status', 1)
+              let data = res.goodsMap[key]
+              let html = ''
+              if (data.videoSrc) {
+                html = `
                     <button class="play" data-src="${data.videoSrc}">
                       <a href="${data.videoSrc}" target="_blank">play</a>
                     </button>
+                    <button class="download" data-src="${data.videoSrc}">
+                      <a href="${data.videoSrc}" target="_blank">play</a>
+                    </button>
                   `
-            } else {
-              html = `<div>未检测到视频</div>`
+                let imgSrc = data.imgSrc || '';
+                $(item).find('.pic-box-inner .J_ItemPic').attr('src', imgSrc.replace(`60x60`, '220x220'))
+              } else {
+                html = `<div>未检测到视频</div>`
+              }
+              content.html(html)
             }
-            content.html(html)
+          } catch (err) {
+            console.log(err);
           }
         })
       } catch (err) {
@@ -165,7 +175,7 @@ async function detectionVideo() {
 
   $("html,body").animate({ scrollTop: 0 }, 1000);
   console.log(`>>>`, 'taobao.com/search');
-  window.arr = $('#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
+  window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   // 发送消息
 
   appendIframe()
@@ -195,8 +205,10 @@ function addScript(src) {
     $(function () {
       setTimeout(_ => {
         let videoSrc = '';
+        let imgSrc = ''
         if ($('.lib-video:eq(0)').length && $('.lib-video source').length) {
-          videoSrc = $('.lib-video:eq(0) source').attr('src')
+          videoSrc = $('.lib-video:eq(0) source').attr('src');
+          imgSrc = $('#J_UlThumb li:eq(0) img').attr('src');
         }
         // 发送消息
         chrome.extension.sendRequest({
@@ -204,6 +216,7 @@ function addScript(src) {
           videoSrc,
           title: $('.tb-detail-hd h1').text().trim() || $('.tb-main-title').text().trim() || '',
           href: location.href,
+          imgSrc,
           ...urlAnalyze(location.href)
         });
       }, 1000)
