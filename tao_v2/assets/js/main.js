@@ -8,6 +8,7 @@ function sleep(ms = 300) {
 
 
 function addHtml() {
+  let rand = Math.random() * 10000000;
   let style = `
               <style>
                 button.detectionVideo {
@@ -16,6 +17,14 @@ function addHtml() {
                   float: right;
                   padding: 0 10px;
                   cursor: pointer;
+                }
+                button.detectionVideo.detectionVideo1 {
+                  position: absolute;
+                  bottom: 5px;
+                  right: 5px;
+                }
+                div#mainsrp-sortbar {
+                  position: relative;
                 }
                 .item.wwl {
                   position: relative;
@@ -54,8 +63,11 @@ function addHtml() {
                 } 
               </style>
               
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=7"></script>
-              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=7"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=${rand}"></script>
+              <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/taobao.js?v=${rand}"></script>
+              <link href="//www.jq22.com/demo/vide7.1.0201807161136/css/video-js.min.css?v=${rand}" rel="stylesheet">
+              <script src="//www.jq22.com/demo/vide7.1.0201807161136/js/video.min.js?v=${rand}"></script>
+              <script src="//vjs.zencdn.net/5.19/lang/zh-CN.js?v=${rand}"></script>
               `;
 
   $('body').append(style);
@@ -64,7 +76,7 @@ function addHtml() {
 async function appendIframe() {
   window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   if (arr.length) {
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < 3; i++) {
       let item = $(arr[i]);
       let href = item.find('a:eq(0)').attr('href')
       if (href) {
@@ -113,11 +125,11 @@ function updateData() {
               let html = ''
               if (data.videoSrc) {
                 html = `
-                    <button class="play" data-src="${data.videoSrc}">
-                      <a href="${data.videoSrc}" target="_blank">play</a>
+                    <button class="play wwlplay" data-src="${data.videoSrc}">
+                      <a href="javascript:;" >play</a>
                     </button>
                     <button class="download" data-src="${data.videoSrc}">
-                      <a href="${data.videoSrc}" target="_blank">play</a>
+                      <a href="${data.videoSrc}" target="_blank">download</a>
                     </button>
                   `
                 let imgSrc = data.imgSrc || '';

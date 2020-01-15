@@ -8,6 +8,8 @@ let time = setInterval(_ => {
       $('collection-title').append(`<button class="detectionVideo ">检测视频</button>`)
       $(document).on('click', '.detectionVideo', function () {
         localStorage.setItem('wwlTask', true);
+      }).on('click', '.wwlplay', function () {
+        console.log(6666);
       })
     }
   } catch (err) {
