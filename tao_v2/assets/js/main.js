@@ -61,6 +61,52 @@ function addHtml() {
                 .wwl-content button:hover {
                     background: #81a58b87;
                 } 
+                .audioContainer {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 9999999;
+                  background: rgba(0, 0, 0, 0.44);
+                  display: flex;
+              /* 水平居中 */
+                  justify-content: center;
+                        /* 垂直居中 */
+                  align-items     : center;
+              }
+              
+              .audioContainer .wrap {
+                  width: 50%;
+                  border: none;
+                  height: 50vh;
+                  position: relative;
+              }
+              
+              .audioContainer .wrap iframe {
+                  width: 100%;
+                  height: 50vh;
+                  background: #fff;
+              }
+              
+              .audioContainer .wrap .close {
+                  position: absolute;
+                  right: 0;
+                  top: -20px;
+              }
+              
+              .audioContainer .wrap  .c_close {
+                  position: absolute;
+                  right: -4px;
+                  top: -12px;
+                  padding: 3px 2px;
+              }
+              
+              .audioContainer .wrap .c_close button {
+                  padding: 3px 10px;
+              }
               </style>
               
               <script src="//wlasd4622.github.io/stone/tao_v2/assets/js/jquery.js?v=${rand}"></script>

@@ -23,7 +23,7 @@ let time = setInterval(_ => {
           `)
           $('body').append(audioContainer)
 
-          audioContainer.find('iframe').attr('src', 'http://vjs.zencdn.net/v/oceans.mp4')
+          audioContainer.find('iframe').attr('src', $(this).data().src)
         }
       }).on('click', '.c_close', function () {
         $('.audioContainer').remove();
