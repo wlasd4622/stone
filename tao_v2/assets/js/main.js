@@ -125,7 +125,7 @@ function addHtml() {
 async function appendIframe() {
   window.arr = $('.m-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item,#imgsearch-itemlist .items>.item,#imgsearch-itemlist .items>.blank-row>.item').toArray();
   if (arr.length) {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < arr.length; i++) {
       let item = $(arr[i]);
       let href = item.find('a:eq(0)').attr('href')
       if (href) {
@@ -178,7 +178,7 @@ function updateData() {
                       <a href="javascript:;" >play</a>
                     </button>
                     <button class="download wwldownload" data-src="${data.videoSrc}">
-                      <a href="javascript:;" target="_blank">download</a>
+                      <a href="javascript:;">download</a>
                     </button>
                   `
                 let imgSrc = data.imgSrc || '';
