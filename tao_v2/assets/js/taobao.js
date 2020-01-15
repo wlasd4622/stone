@@ -4,7 +4,8 @@ let time = setInterval(_ => {
     if ($ && $.fn) {
       console.log(6666);
       clearInterval(time)
-      $('.collection-title,#mainsrp-sortbar').append(`<button class="detectionVideo">检测视频</button>`)
+      $('#mainsrp-sortbar').append(`<button class="detectionVideo detectionVideo1">检测视频</button>`)
+      $('collection-title').append(`<button class="detectionVideo ">检测视频</button>`)
       $(document).on('click', '.detectionVideo', function () {
         localStorage.setItem('wwlTask', true);
       })
