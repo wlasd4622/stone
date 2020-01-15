@@ -80,8 +80,6 @@ function addHtml() {
               
               .audioContainer .wrap {
                   width: 50%;
-                  border: none;
-                  height: 50vh;
                   position: relative;
               }
               
@@ -179,8 +177,8 @@ function updateData() {
                     <button class="play wwlplay" data-src="${data.videoSrc}">
                       <a href="javascript:;" >play</a>
                     </button>
-                    <button class="download" data-src="${data.videoSrc}">
-                      <a href="${data.videoSrc}" target="_blank">download</a>
+                    <button class="download wwldownload" data-src="${data.videoSrc}">
+                      <a href="javascript:;" target="_blank">download</a>
                     </button>
                   `
                 let imgSrc = data.imgSrc || '';

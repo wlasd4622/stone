@@ -25,11 +25,38 @@ let time = setInterval(_ => {
         }
       }).on('click', '.c_close', function () {
         $('.audioContainer').remove();
+      }).on('click', 'wwldownload', function () {
+        var src = $(this).data.src;
+        wwlDowmload(src)
       })
     }
   } catch (err) {
     console.log(err);
   }
 }, 300)
+
+
+function wwlDowmload(src = "") {
+  var filename = src.split('/').pop()
+  var x = new XMLHttpRequest();
+  x.open("GET", src, true);
+  x.responseType = 'blob';
+  x.onload = function (e) { downFile(x.response, filename); }
+  x.send();
+  function downFile(content, filename) {
+    // 创建隐藏的可下载链接
+    var eleLink = document.createElement('a');
+    eleLink.download = filename;
+    eleLink.style.display = 'none';
+    // 字符内容转变成blob地址
+    var blob = new Blob([content]);
+    eleLink.href = URL.createObjectURL(blob);
+    // 触发点击
+    document.body.appendChild(eleLink);
+    eleLink.click();
+    // 然后移除
+    document.body.removeChild(eleLink);
+  };
+}
 
 
