@@ -21,6 +21,8 @@ function addHtml() {
                   top: 4px;
                   position: fixed;
                   left: 10px;
+                  border: 1px solid #847b7b;
+                  background: #fff;
                 }
                 div#mainsrp-sortbar {
                   position: relative;
