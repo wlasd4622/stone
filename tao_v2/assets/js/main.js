@@ -325,8 +325,3 @@ window.currUrl = location.href;
     })
   }
 })();
-
-
-
-
-
